@@ -1,0 +1,47 @@
+<style>
+* {
+  background-color: black;
+  color: pink;
+  font-family: sans-serif;
+}
+
+</style>
+
+
+<h1><%=@name.capitalize%></h1>
+
+<h2>Email</h2>
+<ul>
+  <li>
+    <%=@users[@name.to_sym][:email]%>
+  </li>
+</ul>
+
+<h2>My interests</h2>
+<ul>
+  <%@users[@name.to_sym][:interests].each do |interest|%>
+  <li>
+    <%=interest%>
+  </li>
+  <%end%>
+</ul>
+
+
+<h3>Other users:</h3>
+<ul>
+  <%result = []%>
+  <%arr = get_names(@users, @name)%>
+  <%arr.each do |name|%>
+  <li>
+    <a href="/<%=name%>"><%=name.capitalize%></a>
+  </li>
+  <%end%>
+</ul>
+
+<a href="/"><h3>Home</h3></a>
+
+<h3>Current Activity</h3>
+<p>There are currently <%=@users.keys.count%> users active </p>
+<p>With a total of: <%=count_value(@users, :interests)%> interests</p>
+
+<%# <%=@user%>
